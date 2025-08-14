@@ -1,0 +1,335 @@
+
+/* الخطوط - تم إضافة خط Tajawal للعربية */
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap');
+
+/* المتغيرات */
+:root {
+  --primary-dark: #0a192f;
+  --secondary-dark: #172a45;
+  --accent-blue: #3b82f6;
+  --accent-teal: #64ffda;
+  --light-text: #e6f1ff;
+  --border-blue: #1e3a8a;
+  --correct-color: #10b981;
+  --wrong-color: #ef4444;
+}
+
+/* إعادة الضبط الأساسية */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Tajawal', Arial, sans-serif;
+  background-color: var(--primary-dark);
+  color: var(--light-text);
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+/* الهيكل الرئيسي */
+.main-container {
+  width: 100%;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.content-wrapper {
+  width: 100%;
+  max-width: 1400px;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* العنوان الرئيسي */
+.main-title {
+  color: white;
+  text-align: center;
+  margin: 0 auto;
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 700;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  padding: 1rem 0;
+}
+
+/* منطقة اللعبة */
+.game-area {
+  display: grid;
+  grid-template-columns: minmax(300px, 1fr) 300px;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+/* حاوية اللعبة */
+.game-container {
+  background: var(--secondary-dark);
+  border-radius: 15px;
+  padding: 1.5rem;
+  border: 1px solid var(--border-blue);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.game-title {
+  color: var(--accent-teal);
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 1.75rem;
+}
+
+/* مؤشر الصعوبة */
+.difficulty-indicator {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 1.1rem;
+}
+
+.difficulty-easy { color: #4ade80; }
+.difficulty-medium { color: #fbbf24; }
+.difficulty-hard { color: #f87171; }
+
+/* شريط التقدم */
+.progress-container {
+  width: 100%;
+  margin: 1.5rem 0;
+  position: relative;
+}
+
+.progress-bar {
+  height: 12px;
+  background-color: var(--border-blue);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.progress-bar::after {
+  content: '';
+  height: 100%;
+  width: var(--progress, 0%);
+  background: linear-gradient(90deg, var(--accent-blue), #6366f1);
+  border-radius: 6px;
+  display: block;
+  transition: width 0.4s ease;
+}
+
+#stageCounter {
+  position: absolute;
+  top: -25px;
+  right: 0;
+  font-size: 0.875rem;
+  color: #94a3b8;
+}
+
+/* حاوية السؤال */
+.question-container {
+  margin: 1.5rem 0;
+}
+
+#questionText {
+  font-size: 1.25rem;
+  margin-bottom: 1.5rem;
+  color: var(--light-text);
+  text-align: center;
+  line-height: 1.5;
+}
+
+/* خيارات الإجابة */
+.options-container {
+  display: grid;
+  gap: 0.75rem;
+  margin: 1.5rem 0;
+}
+
+.option {
+  padding: 1rem;
+  background-color: #1e293b;
+  border: 2px solid #334155;
+  border-radius: 10px;
+  color: var(--light-text);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.option:hover {
+  background-color: #334155;
+  transform: translateY(-2px);
+}
+
+.option.selected {
+  background-color: var(--accent-blue);
+  color: white;
+  border-color: #2563eb;
+}
+
+.option.correct {
+  background-color: var(--correct-color);
+  border-color: #059669;
+}
+
+.option.wrong {
+  background-color: var(--wrong-color);
+  border-color: #dc2626;
+}
+
+/* الأزرار */
+.submit-btn, .restart-btn {
+  display: block;
+  width: 100%;
+  max-width: 250px;
+  margin: 1.5rem auto;
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, var(--accent-blue), #2563eb);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.submit-btn:hover, .restart-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(59, 130, 246, 0.3);
+}
+
+.submit-btn:disabled {
+  background: #64748b;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* شاشة النتائج */
+.result-container {
+  text-align: center;
+  padding: 1.5rem;
+  animation: fadeIn 0.5s ease;
+}
+
+#resultText {
+  font-size: 1.5rem;
+  margin: 1rem 0;
+  color: var(--light-text);
+}
+
+/* منطقة الألعاب الجانبية */
+.more-games {
+  background: var(--secondary-dark);
+  border-radius: 15px;
+  padding: 1.5rem;
+  border: 1px solid var(--border-blue);
+  position: sticky;
+  top: 1.5rem;
+}
+
+.more-games-title {
+  color: var(--accent-teal);
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid var(--accent-blue);
+}
+
+.games-list {
+  display: grid;
+  gap: 0.75rem;
+  list-style: none;
+}
+
+.games-list a {
+  color: var(--light-text);
+  padding: 0.75rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  display: block;
+  text-decoration: none;
+}
+
+.games-list a:hover {
+  background: rgba(59, 130, 246, 0.2);
+  transform: translateX(5px);
+}
+
+/* تأثيرات الحركة */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* التجاوب للشاشات المتوسطة */
+@media (max-width: 992px) {
+  .game-area {
+    grid-template-columns: 1fr;
+  }
+  
+  .more-games {
+    position: static;
+    max-width: 100%;
+  }
+}
+
+/* التجاوب للهواتف */
+@media (max-width: 576px) {
+  .main-container {
+    padding: 1rem;
+  }
+  
+  .game-container,
+  .more-games {
+    padding: 1rem;
+    border-radius: 10px;
+  }
+  
+  .game-title {
+    font-size: 1.5rem;
+  }
+  
+  #questionText {
+    font-size: 1.1rem;
+  }
+  
+  .option {
+    padding: 0.75rem;
+    font-size: 0.9rem;
+  }
+  
+  .submit-btn, .restart-btn {
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* تحسينات للوضع الأفقي على الهواتف */
+@media (max-height: 500px) and (orientation: landscape) {
+  .main-container {
+    padding: 0.5rem;
+  }
+  
+  .game-container,
+  .more-games {
+    padding: 0.75rem;
+  }
+  
+  .game-title {
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+  }
+  
+  #questionText {
+    font-size: 1rem;
+    margin-bottom: 0.75rem;
+  }
+}
